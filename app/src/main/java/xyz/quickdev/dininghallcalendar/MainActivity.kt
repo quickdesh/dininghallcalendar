@@ -18,8 +18,35 @@ class MainActivity : ComponentActivity() {
             DiningHallCalendarTheme {
                 Column(modifier = Modifier.fillMaxSize()) {
 
-                    DiningZone("Grill Works Sides")
-                    DiningZone("Waffle, Doughnut, Bagel Bar")
+                    val grillFood = listOf(
+                        FoodItem(
+                            "Bacon",
+                            listOf(
+                                NutritionLabel.Dairy,
+                                NutritionLabel.Eggs,
+                                NutritionLabel.Fish,
+                                NutritionLabel.Soy
+                            )
+                        ),
+                        FoodItem(
+                            "Pancakes Plain",
+                            listOf(
+                                NutritionLabel.Eggs,
+                                NutritionLabel.Vegetarian,
+                            )
+                        ),
+                        FoodItem(
+                            "Grilled Chicken Thigh",
+                            listOf(
+                                NutritionLabel.Halal,
+                                NutritionLabel.Local,
+                                NutritionLabel.Smart,
+                            )
+                        ),
+                    )
+
+                    DiningZone("Grill Works Sides", grillFood)
+                    DiningZone("Waffle, Doughnut, Bagel Bar", emptyList())
 
                     NutritionLabel.entries.forEach {
                         it.Icon()

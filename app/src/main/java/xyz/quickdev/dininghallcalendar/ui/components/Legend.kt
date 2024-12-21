@@ -20,9 +20,10 @@ import androidx.compose.ui.unit.sp
 fun Legend(
     label: String,
     color: Color,
+    modifier: Modifier,
 ){
     Box(
-        modifier = Modifier.size(32.dp),
+        modifier = modifier.size(32.dp),
         contentAlignment = Alignment.Center
     ) {
         Box(

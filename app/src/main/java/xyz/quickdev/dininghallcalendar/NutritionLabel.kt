@@ -1,6 +1,7 @@
 package xyz.quickdev.dininghallcalendar
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import xyz.quickdev.dininghallcalendar.ui.components.Legend
 
@@ -21,4 +22,6 @@ enum class NutritionLabel(val description: String, val label: String, val color:
 }
 
 @Composable
-fun NutritionLabel.Icon() { Legend(label = this.label, Color(this.color)) }
+fun NutritionLabel.Icon(modifier: Modifier = Modifier) {
+    Legend(label = this.label, color = Color(this.color), modifier = modifier)
+}
