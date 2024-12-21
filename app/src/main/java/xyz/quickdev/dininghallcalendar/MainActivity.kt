@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
+import xyz.quickdev.dininghallcalendar.ui.components.DiningZone
 import xyz.quickdev.dininghallcalendar.ui.theme.DiningHallCalendarTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,6 +17,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             DiningHallCalendarTheme {
                 Column(modifier = Modifier.fillMaxSize()) {
+
+                    DiningZone("Grill Works Sides")
+                    DiningZone("Waffle, Doughnut, Bagel Bar")
 
                     NutritionLabel.entries.forEach {
                         it.Icon()
