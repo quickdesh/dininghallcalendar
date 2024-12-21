@@ -5,9 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import xyz.quickdev.dininghallcalendar.ui.components.DiningZone
+import xyz.quickdev.dininghallcalendar.ui.components.DiningHallDisplay
 import xyz.quickdev.dininghallcalendar.ui.theme.DiningHallCalendarTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,10 +17,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DiningHallCalendarTheme {
-                Column(modifier = Modifier.fillMaxSize()) {
+                Column(modifier = Modifier.fillMaxSize().displayCutoutPadding()) {
 
                     val grillFood = listOf(
-                        FoodItem(
+                        DiningFood(
                             "Bacon",
                             listOf(
                                 NutritionLabel.Dairy,
@@ -28,14 +29,14 @@ class MainActivity : ComponentActivity() {
                                 NutritionLabel.Soy
                             )
                         ),
-                        FoodItem(
+                        DiningFood(
                             "Pancakes Plain",
                             listOf(
                                 NutritionLabel.Eggs,
                                 NutritionLabel.Vegetarian,
                             )
                         ),
-                        FoodItem(
+                        DiningFood(
                             "Grilled Chicken Thigh",
                             listOf(
                                 NutritionLabel.Halal,
@@ -45,8 +46,15 @@ class MainActivity : ComponentActivity() {
                         ),
                     )
 
-                    DiningZone("Grill Works Sides", grillFood)
-                    DiningZone("Waffle, Doughnut, Bagel Bar", emptyList())
+                    DiningHallDisplay(
+                        DiningHall(
+                            "South Campus",
+                            listOf(
+                                DiningZone("Grill Works Sides", grillFood),
+                                DiningZone("Waffle, Doughnut, Bagel Bar", emptyList())
+                            )
+                        )
+                    )
 
                     NutritionLabel.entries.forEach {
                         it.Icon()
