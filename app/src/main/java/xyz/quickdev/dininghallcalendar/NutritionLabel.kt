@@ -15,6 +15,7 @@ enum class NutritionLabel(val description: String, val label: String, val color:
     Soy(description = "Soy", label = "S", color = 0xFF88cc22),
     Halal(description = "Halal Friendly", label = "HF", color = 0xFF00aaee),
     Local(description = "Locally Grown", label = "L", color = 0xFF667788),
+    Smart(description = "Smart Choice", label = "SC", color = 0xFFFFFFFF),
     Vegan(description = "Vegan", label = "VG", color = 0xFF773399),
     Vegetarian(description = "Vegetarian", label = "V", color = 0xFF006633);
 }
