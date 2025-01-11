@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.dininghallcalendar"
+    namespace = "xyz.quickdev.dininghallcalendar"
     compileSdk = 35
 
     defaultConfig {
@@ -53,5 +53,7 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.material3)
     implementation(libs.jsoup)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
 
 }

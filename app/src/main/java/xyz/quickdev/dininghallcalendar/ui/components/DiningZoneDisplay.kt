@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.HorizontalDivider
@@ -23,10 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -36,10 +31,10 @@ import androidx.compose.ui.unit.dp
 import xyz.quickdev.dininghallcalendar.DiningZone
 
 @Composable
-fun DiningZoneDisplay(diningZone: DiningZone) {
+fun DiningZoneDisplay(diningZone: DiningZone, showFood: Boolean, flipShowFood: () -> Unit) {
     val interactionSource = remember { MutableInteractionSource() }
     val arrowRotation = remember { Animatable(-90f) }
-    var showFood by remember { mutableStateOf(false) }
+
 
     LaunchedEffect(showFood) {
         arrowRotation.animateTo(
@@ -57,7 +52,7 @@ fun DiningZoneDisplay(diningZone: DiningZone) {
                     .clickable(
                         interactionSource = interactionSource,
                         indication = ripple()
-                    ) { showFood = !showFood }
+                    ) { flipShowFood() }
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -89,8 +84,8 @@ fun DiningZoneDisplay(diningZone: DiningZone) {
                 enter = expandVertically(animationSpec = tween(durationMillis = 300)),
                 exit = shrinkVertically(animationSpec = tween(durationMillis = 300))
             ) {
-                LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                    items(diningZone.foodList) {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    diningZone.foodList.forEach {
                         DiningFoodDisplay(it)
                     }
                 }

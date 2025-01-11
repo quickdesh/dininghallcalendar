@@ -1,8 +1,10 @@
 [versions]
 agp = "8.9.0-alpha06"
-jsoup = "1.18.1"
+jsoup = "1.18.3"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
+ktorClientCio = "2.3.3"
+ktorClientCore = "2.3.3"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
 composeBom = "2024.12.01"
@@ -15,6 +17,8 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCio" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

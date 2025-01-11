@@ -2,6 +2,11 @@ package xyz.quickdev.dininghallcalendar
 
 data class DiningHall(
     val hallName: String,
+    val mealList: List<DiningMeal>
+)
+
+data class DiningMeal(
+    val mealName: String,
     val zoneList: List<DiningZone>
 )
 
@@ -11,6 +16,6 @@ data class DiningZone(
 )
 
 data class DiningFood(
-    val name: String,
-    val labelList: List<NutritionLabel>
+    val foodName: String,
+    val labelList: List<DiningLabel>
 )
