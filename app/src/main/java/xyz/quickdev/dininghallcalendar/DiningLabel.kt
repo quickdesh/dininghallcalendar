@@ -12,7 +12,7 @@ enum class DiningLabel(val description: String, val img: String, val label: Stri
     Gluten(description = "Gluten", img = "gluten.gif", label = "G", color = 0xFFff5522),
     Nuts(description = "Nuts", img = "nuts.gif", label = "N", color = 0xFFee1122),
     Sesame(description = "Sesame", img = "sesame.gif", label = "SS", color = 0xFFff9900),
-    Shellfish(description = "Shellfish", img = "Shellfish.gif", label = "SF", color = 0xFF11aa99),
+    Shellfish(description = "Shellfish", img = "Shellfish.png", label = "SF", color = 0xFF11aa99),
     Soy(description = "Soy", img = "soy.gif", label = "S", color = 0xFF88cc22),
     Halal(description = "Halal Friendly", img = "HalalFriendly.gif", label = "HF", color = 0xFF00aaee),
     Local(description = "Locally Grown", img = "local.gif", label = "L", color = 0xFF667788),

@@ -14,13 +14,15 @@ suspend fun fetchAndParseWebPage(url: String): DiningHall? {
     var diningZone: DiningZone
     var diningFood: DiningFood
 
-        val client = HttpClient(CIO)
+    val client = HttpClient(CIO)
 
         try {
 
             val htmlContent: String = client.get(url).body()
 
             val document = Jsoup.parse(htmlContent)
+
+            Log.i("qwert", "url =  $url")
 
             Log.i("qwert", "document =  ${document.toString().slice(0..100)}")
 
@@ -42,6 +44,7 @@ suspend fun fetchAndParseWebPage(url: String): DiningHall? {
                     zoneClass.select("div.row.menu-item-row").forEach { foodClass ->
                         val foodClassName = foodClass.selectFirst("a.menu-item-name")!!.text()
                         val labelList = mutableListOf<DiningLabel>()
+                        if (zoneClassName == "Woks") { Log.i("qwert", "AAAAAAAAA = $foodClassName") }
                         foodClass.select("img.nutri-icon").forEach { labelClass ->
                             val matchingLabel = DiningLabel.entries.find {
                                 labelClass.attr("src").contains(it.img)
@@ -59,12 +62,14 @@ suspend fun fetchAndParseWebPage(url: String): DiningHall? {
                         foodList = foodList,
                     )
                     zoneList.add(diningZone)
+                    Log.i("qwert", "label name = ${zoneClassName}")
                 }
                 diningMeal = DiningMeal(
                     mealName = mealClassName,
                     zoneList = zoneList,
                 )
                 mealList.add(diningMeal)
+                Log.i("qwert", "meal class name = $mealClassName")
             }
 
             diningHall = DiningHall(
@@ -72,8 +77,7 @@ suspend fun fetchAndParseWebPage(url: String): DiningHall? {
                 mealList = mealList
             )
 
-
-        } catch (_: Exception) {
+        } catch (e: Exception) {
             diningHall = null
         }
 

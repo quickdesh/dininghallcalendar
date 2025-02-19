@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.ui.Modifier
 import xyz.quickdev.dininghallcalendar.ui.DiningHallScreen
 import xyz.quickdev.dininghallcalendar.ui.DiningHallViewModel
@@ -18,7 +19,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DiningHallCalendarTheme {
-                Column(modifier = Modifier.fillMaxSize().displayCutoutPadding()) {
+                Column(modifier = Modifier.fillMaxSize().displayCutoutPadding().navigationBarsPadding()) {
 
                     DiningHallScreen(DiningHallViewModel())
                 }

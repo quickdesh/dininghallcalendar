@@ -12,6 +12,6 @@ fun DiningHallScreen(viewModel: DiningHallViewModel) {
     if (diningHall == null) {
         CircularProgressIndicator()
     } else {
-        DiningHallDisplay(diningHall!!)
+        DiningHallDisplay(diningHall!!, viewModel::updateDate, selectedMillis = viewModel.diningMillis.value)
     }
 }
