@@ -28,12 +28,13 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import xyz.quickdev.dininghallcalendar.DiningZone
 
 @Composable
 fun DiningZoneDisplay(diningZone: DiningZone, showFood: Boolean, flipShowFood: () -> Unit) {
     val interactionSource = remember { MutableInteractionSource() }
-    val arrowRotation = remember { Animatable(-90f) }
+    val arrowRotation = remember { Animatable(if (showFood) 0f else -90f) }
 
 
     LaunchedEffect(showFood) {
@@ -61,6 +62,7 @@ fun DiningZoneDisplay(diningZone: DiningZone, showFood: Boolean, flipShowFood: (
                     Text(
                         text = diningZone.zoneName,
                         modifier = Modifier.padding(horizontal = 8.dp),
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     )
                     HorizontalDivider(

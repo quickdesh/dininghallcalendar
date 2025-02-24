@@ -24,6 +24,7 @@ suspend fun fetchAndParseWebPage(url: String): DiningHall? {
 
             Log.i("qwert", "url =  $url")
 
+
             Log.i("qwert", "document =  ${document.toString().slice(0..100)}")
 
             val locationNumber = Regex(pattern = "(?<=locationNum=)\\d+").find(url)!!.value.toInt()
@@ -44,7 +45,6 @@ suspend fun fetchAndParseWebPage(url: String): DiningHall? {
                     zoneClass.select("div.row.menu-item-row").forEach { foodClass ->
                         val foodClassName = foodClass.selectFirst("a.menu-item-name")!!.text()
                         val labelList = mutableListOf<DiningLabel>()
-                        if (zoneClassName == "Woks") { Log.i("qwert", "AAAAAAAAA = $foodClassName") }
                         foodClass.select("img.nutri-icon").forEach { labelClass ->
                             val matchingLabel = DiningLabel.entries.find {
                                 labelClass.attr("src").contains(it.img)
@@ -62,14 +62,12 @@ suspend fun fetchAndParseWebPage(url: String): DiningHall? {
                         foodList = foodList,
                     )
                     zoneList.add(diningZone)
-                    Log.i("qwert", "label name = ${zoneClassName}")
                 }
                 diningMeal = DiningMeal(
                     mealName = mealClassName,
                     zoneList = zoneList,
                 )
                 mealList.add(diningMeal)
-                Log.i("qwert", "meal class name = $mealClassName")
             }
 
             diningHall = DiningHall(

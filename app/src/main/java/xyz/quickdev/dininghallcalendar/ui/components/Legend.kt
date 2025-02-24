@@ -23,17 +23,17 @@ fun Legend(
     modifier: Modifier,
 ){
     Box(
-        modifier = modifier.size(32.dp),
+        modifier = modifier.size(24.dp),
         contentAlignment = Alignment.Center
     ) {
         Box(
-            modifier = Modifier.size(24.dp).background(color = color, shape = CircleShape),
+            modifier = Modifier.size(20.dp).background(color = color, shape = CircleShape),
             contentAlignment = Alignment.Center,
         ) {
             Text(
                 text = label,
                 style = TextStyle(
-                    fontSize = 12.sp,
+                    fontSize = 10.sp,
                     color = Color.Black,
                     fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.Black,

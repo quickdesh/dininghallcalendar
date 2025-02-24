@@ -1,5 +1,6 @@
 package xyz.quickdev.dininghallcalendar.ui
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -21,6 +22,8 @@ class DiningHallViewModel : ViewModel() {
     private val _diningMillis = mutableLongStateOf(System.currentTimeMillis())
     val diningMillis: State<Long> = _diningMillis
 
+    private var previousDiningDate = ""
+
     init {
         fetchDiningHallData()
     }
@@ -28,14 +31,20 @@ class DiningHallViewModel : ViewModel() {
     private fun fetchDiningHallData() {
         viewModelScope.launch(Dispatchers.IO) {
             val diningDate = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(Date(diningMillis.value))
-            val fetchedData = fetchAndParseWebPage("https://nutrition.umd.edu/?locationNum=19&dtdate=${diningDate}")
+            if (diningDate == previousDiningDate) return@launch
+
+            _diningHall.value = null
+            val fetchedData = fetchAndParseWebPage(
+                url = "https://nutrition.umd.edu/?locationNum=19&dtdate=${diningDate}"
+            )
             _diningHall.value = fetchedData
+
+            previousDiningDate = diningDate
         }
     }
 
     fun updateDate(millis: Long?) {
         millis?.let{
-            _diningHall.value = null
             _diningMillis.longValue = millis
             fetchDiningHallData()
         }

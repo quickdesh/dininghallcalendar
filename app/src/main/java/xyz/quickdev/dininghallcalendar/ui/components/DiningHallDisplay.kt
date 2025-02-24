@@ -30,11 +30,15 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.quickdev.dininghallcalendar.DiningHall
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Composable
 fun DiningHallDisplay(diningHall: DiningHall, onDateSelected: (Long?) -> Unit, selectedMillis: Long) {
@@ -43,23 +47,34 @@ fun DiningHallDisplay(diningHall: DiningHall, onDateSelected: (Long?) -> Unit, s
 
     val tabTitles = diningHall.mealList.map { it.mealName }
     var showDatePicker by remember { mutableStateOf(false) }
+    val diningDate = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, Locale.getDefault())
 
     Column {
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = diningHall.hallName,
                 modifier = Modifier.padding(all = 16.dp),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
-            Icon(
-                imageVector = Icons.Filled.DateRange,
-                contentDescription = null,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .size(24.dp)
-                    .clickable { showDatePicker = true }
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.clickable { showDatePicker = true }
+            )  {
+                Icon(
+                    imageVector = Icons.Filled.DateRange,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .size(24.dp)
+                )
+                Text(
+                    text = diningDate.format(Date(selectedMillis)),
+                    modifier = Modifier.padding(),
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
 
         if (showDatePicker) {
@@ -96,7 +111,7 @@ fun DiningHallDisplay(diningHall: DiningHall, onDateSelected: (Long?) -> Unit, s
                 )
             },
         ) { tabIndex ->
-            previousTabIndex = tabIndex // Update the previous index
+            previousTabIndex = tabIndex
             DiningMealDisplay(diningHall.mealList[tabIndex], showFoodMap)
         }
     }

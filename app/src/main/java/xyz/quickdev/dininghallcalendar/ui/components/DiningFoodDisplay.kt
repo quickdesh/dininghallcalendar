@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -32,7 +33,8 @@ fun DiningFoodDisplay(diningFood: DiningFood) {
                 text = diningFood.foodName,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                fontSize = 13.sp,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Medium,
                 modifier = Modifier.weight(1f)
             )
             Spacer(modifier = Modifier.width(32.dp))
@@ -41,7 +43,7 @@ fun DiningFoodDisplay(diningFood: DiningFood) {
                 it.Icon(modifier = Modifier.padding(horizontal = 2.dp))
             }
         }
-        StripedHorizontalDivider()
+        // StripedHorizontalDivider()
     }
 }
 
