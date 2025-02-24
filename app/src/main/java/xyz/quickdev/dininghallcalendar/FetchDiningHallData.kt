@@ -15,9 +15,7 @@ suspend fun fetchAndParseWebPage(url: String): DiningHall? {
     var diningFood: DiningFood
 
     val client = HttpClient(CIO)
-
         try {
-
             val htmlContent: String = client.get(url).body()
 
             val document = Jsoup.parse(htmlContent)

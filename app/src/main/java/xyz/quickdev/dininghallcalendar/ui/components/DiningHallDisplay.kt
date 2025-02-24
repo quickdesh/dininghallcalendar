@@ -39,6 +39,7 @@ import xyz.quickdev.dininghallcalendar.DiningHall
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
 @Composable
 fun DiningHallDisplay(diningHall: DiningHall, onDateSelected: (Long?) -> Unit, selectedMillis: Long) {
@@ -117,6 +118,9 @@ fun DiningHallDisplay(diningHall: DiningHall, onDateSelected: (Long?) -> Unit, s
     }
 }
 
+
+private val offsetMillis = TimeZone.getDefault().rawOffset - 500
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DatePickerModal(
@@ -124,13 +128,13 @@ fun DatePickerModal(
     onDismiss: () -> Unit,
     selectedMillis: Long
 ) {
-    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = selectedMillis)
+    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = selectedMillis - offsetMillis)
 
     DatePickerDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = {
-                onDateSelected(datePickerState.selectedDateMillis)
+                onDateSelected(datePickerState.selectedDateMillis?.minus(offsetMillis))
                 onDismiss()
             }) {
                 Text("OK")
